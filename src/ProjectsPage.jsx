@@ -1,0 +1,98 @@
+import { useState, useRef, useEffect } from "react";
+
+function ExpandableBox({ title, preview, children }) {
+  const [expanded, setExpanded] = useState(false);
+  const [height, setHeight] = useState(0);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (expanded && contentRef.current) {
+      setHeight(contentRef.current.scrollHeight);
+    } else {
+      setHeight(0);
+    }
+  }, [expanded, children]);
+
+  return (
+    <div
+      style={{
+        border: "1px solid #007bff",
+        borderRadius: "20px",
+        padding: "12px 20px",
+        margin: "20px auto",
+        maxWidth: "500px",
+        cursor: "pointer",
+        boxShadow: expanded ? "0 2px 8px rgba(0,123,255,0.15)" : "none",
+        transition: "box-shadow 0.2s"
+      }}
+      onClick={() => setExpanded((prev) => !prev)}
+    >
+      <span style={{ fontWeight: "500", color: "#007bff" }}>
+        {title}
+      </span>
+      <div style={{ marginTop: "8px", color: "#333", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+        {preview}
+      </div>
+      <div
+        ref={contentRef}
+        style={{
+          maxHeight: expanded ? height : 0,
+          opacity: expanded ? 1 : 0,
+          overflow: "hidden",
+          transition: "max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s",
+          marginTop: expanded ? "12px" : "0px",
+          color: "#fff"
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function ProjectsPage() {
+  return (
+    <>
+      <div style={{ padding: '20px', marginTop: '60px' }}>
+        <h2>My Interests</h2>
+        <p>I have a deep interest in various fields of computer science, particularly in web development, machine learning, and artificial intelligence, coumputer vision etc.
+          I enjoy working on projects that challenge me to learn new skills and technologies. 
+        </p>
+      </div>
+      <h1 style={{ textAlign: "center", marginTop: "40px" }}>Projects</h1>
+      <ExpandableBox
+        title="Projects That I Done During My Bechalor's"
+        preview="Click to see more">
+        <list>
+          <li>1.(2021)Developed a application for communicating between UIU student and teachers build in java. </li>
+          <li>2.(2022) Developed a smart shoe project that alerts the user if they step on a mine. Built using Raspberry Pi, the system detects when the user steps on metallic objects and sends a signal for safety. In case of stepping on a mine, plaster of Paris can be used to secure the shoe to the mine, preventing accidental detonation.</li>
+          <li>3.(2023) Developed a smart drone capable of detecting humans using computer vision. This drone can be utilized during disaster scenarios to assist in rescue operations.</li>
+          <li>4.(2024) Created a web application for crowedfounding and loan for the UIU studets.</li>
+          <li>5.(2025) Created a web application and it's mobile app version for the farmer. Where farmer upload their crops and find what kind of diseases they have. And can chat with a chat model. </li>
+        </list>
+      </ExpandableBox>
+      <ExpandableBox
+        title="HSC - 2020"
+        preview="Click to see more about my HSC education">
+        <p>
+          I completed my Higher Secondary Certificate (HSC) in 2020 from Shaheed Begum Sheikh Fazilatun Nessa Mujib Government College, Hazaribagh, Dhaka.
+          During my HSC, I continued to focus on Science subjects, further deepening my knowledge and skills in areas that are crucial for a career in technology and computer science. 
+          There was the time of the COVID-19 pandemic during my HSC studies, which presented unique challenges. However, I adapted to online learning and remained committed to my education despite the difficulties.
+          The exam was cancled and results were based on previous academic performance. My results were GPA: 4.50/5.00.
+        </p>
+      </ExpandableBox>
+      <ExpandableBox
+        title="Bachelor's in Computer Science - 2025"
+        preview="Click to see more about my Bachelor's education">
+        <p>
+          I completed my Bachelor's degree in Computer Science and Engineering from United International University (UIU) in 2025.
+          During my time at UIU, I gained extensive knowledge and hands-on experience in various areas of computer science, including programming, algorithms, data structures, databases, web development, and artificial intelligence. 
+          I actively participated in projects that allowed me to apply theoretical concepts to real-world scenarios, further enhancing my skills and understanding of the field.
+          My academic performance was strong throughout my studies, and I graduated with a CGPA of 3.54/4.00.
+        </p>
+      </ExpandableBox>
+    </>
+  );
+}
+
+export default ProjectsPage;
