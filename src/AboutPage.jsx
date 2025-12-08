@@ -51,9 +51,18 @@ function ExpandableBox({ title, preview, children }) {
 }
 
 function AboutPage() {
+  // Responsive: track window width
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  const isMobile = windowWidth < 700;
+
   return (
     <>
-      <div style={{ padding: '20px', marginTop: '60px' }}>
+      <div style={{ padding: isMobile ? '10px' : '20px', marginTop: isMobile ? '30px' : '60px', maxWidth: isMobile ? '98vw' : '1000px', marginLeft: 'auto', marginRight: 'auto' }}>
         <h2>Who I Am</h2>
         <p>Hi, I'm Molla Md Sabit. I am a Computer Science student and researcher driven by the idea of solving real-world problems through technology. Whether it's training deep learning models or building smooth systems, I love the challenge of creating something new.</p>
         <h2>What I Do</h2>
@@ -73,7 +82,7 @@ function AboutPage() {
           Specially the character Bruce Wayne aka Batman has always been my favorite. His intelligence, resourcefulness, and determination to fight injustice resonate deeply with me. I also love to talk about scitific concepts and theories some youtubers like Vsauce, Kurzgesagt, Veritasium, etc help me a lot to quench my curiosity about the world.
           </p>
       </div>
-      <h1 style={{ textAlign: "center", marginTop: "40px" }}>Education</h1>
+      <h1 style={{ textAlign: "center", marginTop: isMobile ? "20px" : "40px" }}>Education</h1>
       <ExpandableBox
         title="SSC - 2018"
         preview="Click to see more about my SSC education">

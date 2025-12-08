@@ -51,25 +51,34 @@ function ExpandableBox({ title, preview, children }) {
 }
 
 function ProjectsPage() {
+  // Responsive: track window width
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  const isMobile = windowWidth < 700;
+
   return (
     <>
-      <div style={{ padding: '20px', marginTop: '60px' }}>
+      <div style={{ padding: isMobile ? '10px' : '20px', marginTop: isMobile ? '30px' : '60px', maxWidth: isMobile ? '98vw' : '1000px', marginLeft: 'auto', marginRight: 'auto' }}>
         <h2>My Interests</h2>
         <p>I have a deep interest in various fields of computer science, particularly in web development, machine learning, and artificial intelligence, coumputer vision etc.
           I enjoy working on projects that challenge me to learn new skills and technologies. 
         </p>
       </div>
-      <h1 style={{ textAlign: "center", marginTop: "40px" }}>Projects</h1>
+      <h1 style={{ textAlign: "center", marginTop: isMobile ? "20px" : "40px" }}>Projects</h1>
       <ExpandableBox
         title="Projects That I Done During My Bechalor's"
         preview="Click to see more">
-        <list>
+        <ul style={{ paddingLeft: isMobile ? '1.2em' : '2em', fontSize: isMobile ? '1em' : '1.1em' }}>
           <li>1.(2021)Developed a application for communicating between UIU student and teachers build in java. </li>
           <li>2.(2022) Developed a smart shoe project that alerts the user if they step on a mine. Built using Raspberry Pi, the system detects when the user steps on metallic objects and sends a signal for safety. In case of stepping on a mine, plaster of Paris can be used to secure the shoe to the mine, preventing accidental detonation.</li>
           <li>3.(2023) Developed a smart drone capable of detecting humans using computer vision. This drone can be utilized during disaster scenarios to assist in rescue operations.</li>
           <li>4.(2024) Created a web application for crowedfounding and loan for the UIU studets.</li>
           <li>5.(2025) Created a web application and it's mobile app version for the farmer. Where farmer upload their crops and find what kind of diseases they have. And can chat with a chat model. </li>
-        </list>
+        </ul>
       </ExpandableBox>
       
     </>
