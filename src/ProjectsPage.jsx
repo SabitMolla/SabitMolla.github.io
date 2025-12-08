@@ -71,26 +71,7 @@ function ProjectsPage() {
           <li>5.(2025) Created a web application and it's mobile app version for the farmer. Where farmer upload their crops and find what kind of diseases they have. And can chat with a chat model. </li>
         </list>
       </ExpandableBox>
-      <ExpandableBox
-        title="HSC - 2020"
-        preview="Click to see more about my HSC education">
-        <p>
-          I completed my Higher Secondary Certificate (HSC) in 2020 from Shaheed Begum Sheikh Fazilatun Nessa Mujib Government College, Hazaribagh, Dhaka.
-          During my HSC, I continued to focus on Science subjects, further deepening my knowledge and skills in areas that are crucial for a career in technology and computer science. 
-          There was the time of the COVID-19 pandemic during my HSC studies, which presented unique challenges. However, I adapted to online learning and remained committed to my education despite the difficulties.
-          The exam was cancled and results were based on previous academic performance. My results were GPA: 4.50/5.00.
-        </p>
-      </ExpandableBox>
-      <ExpandableBox
-        title="Bachelor's in Computer Science - 2025"
-        preview="Click to see more about my Bachelor's education">
-        <p>
-          I completed my Bachelor's degree in Computer Science and Engineering from United International University (UIU) in 2025.
-          During my time at UIU, I gained extensive knowledge and hands-on experience in various areas of computer science, including programming, algorithms, data structures, databases, web development, and artificial intelligence. 
-          I actively participated in projects that allowed me to apply theoretical concepts to real-world scenarios, further enhancing my skills and understanding of the field.
-          My academic performance was strong throughout my studies, and I graduated with a CGPA of 3.54/4.00.
-        </p>
-      </ExpandableBox>
+      
     </>
   );
 }
