@@ -5,7 +5,7 @@ function Navbar() {
   const navStyle = {
     position: 'fixed',
     top: 0,
-    left: 0,
+    left: '50%',
     width: '100%',
     background: '#000',
     padding: '1rem',
@@ -15,7 +15,6 @@ function Navbar() {
     borderRadius: '0 0 50px 50px',
     margin: '0 auto',
     maxWidth: '800px',
-    left: '50%',
     transform: 'translateX(-50%)',
     transition: 'box-shadow 0.4s, background 0.4s',
     boxShadow: '0 4px 24px rgba(65,105,225,0.15)'
