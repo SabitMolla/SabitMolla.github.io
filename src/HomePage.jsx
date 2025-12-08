@@ -8,7 +8,7 @@ function HomePage() {
         maxWidth: '1050px',
         margin: '120px auto 0 auto',
       }}>
-        <img src="./public/Profile.jpg" alt="My image" style={{
+        <img src="/Portfolio/Profile.jpg" alt="My image" style={{
           width: '300px',
           height: '300px',
           borderRadius: '50%',
@@ -30,21 +30,21 @@ function HomePage() {
       <section style={{ maxWidth: '1050px', margin: '2rem auto 0 auto' }}>
         <h2 style={{ color: '#fff', fontWeight: 'bold', marginBottom: '0.5rem' }}>Languages</h2>
         <div style={{backgroundColor: "white", padding: '1rem' , borderRadius: '40px' , display: 'flex', gap: '2.5rem', alignItems: 'center',justifyContent: 'center', marginBottom: '1.5rem' }}>
-          <img src="./public/python.png" alt="Python" style={{ width: 48, height: 48 }} />
-          <img src="./public/C++.png" alt="C++" style={{ width: 48, height: 48 }} />
-          <img src="./public/java.png" alt="Java" style={{ width: 48, height: 48 }} />
-          <img src="./public/react.png" alt="React" style={{ width: 48, height: 48 }} />
-          <img src="./public/js.png" alt="JavaScript" style={{ width: 48, height: 48 }} />
-          <img src="./public/sql.png" alt="SQL" style={{ width: 48, height: 48 }} />
+          <img src="/Portfolio/python.png" alt="Python" style={{ width: 48, height: 48 }} />
+          <img src="/Portfolio/C++.png" alt="C++" style={{ width: 48, height: 48 }} />
+          <img src="/Portfolio/java.png" alt="Java" style={{ width: 48, height: 48 }} />
+          <img src="/Portfolio/react.png" alt="React" style={{ width: 48, height: 48 }} />
+          <img src="/Portfolio/js.png" alt="JavaScript" style={{ width: 48, height: 48 }} />
+          <img src="/Portfolio/sql.png" alt="SQL" style={{ width: 48, height: 48 }} />
         </div>
       </section>
       <section style={{ maxWidth: '1050px', margin: '2rem auto 0 auto' }}>
         <h2 style={{ color: '#fff', fontWeight: 'bold', marginBottom: '0.5rem' }}>Skills</h2>
         <div style={{ backgroundColor: "white", padding: '1rem' , borderRadius: '40px' , display: 'flex', gap: '2.5rem', alignItems: 'center', justifyContent: 'center' }}>
-          <img src="./public/Kaggle.png" alt="Kaggle" style={{ width: 60, height: 30 }} />
-          <img src="./public/docker.png" alt="Docker" style={{ width: 48, height: 48 }} />
-          <img src="./public/n8n.png" alt="N8N" style={{ width: 80, height: 60 }} />
-          <img src="./public/github.png" alt="GitHub" style={{ width: 48, height: 48 }} />
+          <img src="/Portfolio/Kaggle.png" alt="Kaggle" style={{ width: 60, height: 30 }} />
+          <img src="/Portfolio/docker.png" alt="Docker" style={{ width: 48, height: 48 }} />
+          <img src="/Portfolio/n8n.png" alt="N8N" style={{ width: 80, height: 60 }} />
+          <img src="/Portfolio/github.png" alt="GitHub" style={{ width: 48, height: 48 }} />
         </div>
       </section>
     </>
