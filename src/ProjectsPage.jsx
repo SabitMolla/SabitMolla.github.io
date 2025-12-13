@@ -80,7 +80,46 @@ function ProjectsPage() {
           <li>5.(2025) Created a web application and it's mobile app version for the farmer. Where farmer upload their crops and find what kind of diseases they have. And can chat with a chat model. </li>
         </ul>
       </ExpandableBox>
-      
+      <ExpandableBox
+        title="Commercial Projects"
+        preview="Click to see more">
+        <ul style={{ paddingLeft: isMobile ? '1.2em' : '2em', fontSize: isMobile ? '1em' : '1.1em' }}>
+        <li>1.(2025)Developed a website for a Manpower agency Company <a 
+            href="https://scholarsconsultingltd.com/#home" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: "#4ea1ff", textDecoration: "underline" }}
+            >
+            [Visit Site]</a>
+        </li>
+        <li>1.(2025)Build an E-commerce website <a 
+            href="https://furnituredots.com/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: "#4ea1ff", textDecoration: "underline" }}
+            >
+            [Visit Site]</a>
+        </li>
+
+        </ul>
+      </ExpandableBox>
+      <h1 style={{ textAlign: "center", marginTop: isMobile ? "20px" : "40px" }}>Researchs Paper</h1>
+      <ExpandableBox
+        title="Commercial Projects"
+        preview="Click to see more">
+        <ul style={{ paddingLeft: isMobile ? '1.2em' : '2em', fontSize: isMobile ? '1em' : '1.1em' }}>
+        <li>1.(2025)JailbreakTracer: Explainable Detection of Jailbreaking Prompts in LLMs Using Synthetic Data Generation(It's an IEEE Q1 Paper) <a 
+            href="https://www.researchgate.net/publication/392749895_JailbreakTracer_Explainable_Detection_of_Jailbreaking_Prompts_in_LLMs_Using_Synthetic_Data_Generation" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: "#4ea1ff", textDecoration: "underline" }}
+            >
+            [See it]</a>
+        </li>
+        <li>2.(2025)A Hybrid Deep Learning Framework for Rice Leaf Disease Detection and Classification Using DenseNet201 and YOLOv8 (ieee raaicon paper already accepted and presented in the conference not published yet)          
+        </li>
+        </ul>
+      </ExpandableBox>
     </>
   );
 }

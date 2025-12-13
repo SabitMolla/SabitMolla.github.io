@@ -38,7 +38,7 @@ function HomePage() {
             lineHeight: '1.2',
             textAlign: isMobile ? 'center' : 'left'
           }}>
-            Hi I am Molla Md Sabit. An Software Engineer and Researcher
+            Hi I am Molla Md Sabit. A Software Engineer and Researcher
           </h1>
         </div>
       </section>
