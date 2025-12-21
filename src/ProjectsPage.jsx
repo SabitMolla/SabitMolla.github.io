@@ -103,9 +103,9 @@ function ProjectsPage() {
 
         </ul>
       </ExpandableBox>
-      <h1 style={{ textAlign: "center", marginTop: isMobile ? "20px" : "40px" }}>Researchs Paper</h1>
+      <h1 style={{ textAlign: "center", marginTop: isMobile ? "20px" : "40px" }}>Research Papers(Already Accepted Ones)</h1>
       <ExpandableBox
-        title="Commercial Projects"
+        title="RESEARCH PAPERS PUBLISHED"
         preview="Click to see more">
         <ul style={{ paddingLeft: isMobile ? '1.2em' : '2em', fontSize: isMobile ? '1em' : '1.1em' }}>
         <li>1.(2025)JailbreakTracer: Explainable Detection of Jailbreaking Prompts in LLMs Using Synthetic Data Generation(It's an IEEE Q1 Paper) <a 
