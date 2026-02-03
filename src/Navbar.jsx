@@ -34,6 +34,7 @@ function Navbar() {
   const links = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
+    //{ to: '/blog', label: 'Blog' },
     { to: '/projects', label: 'Works' },
     { to: '/contact', label: 'Contacts' }
   ];
