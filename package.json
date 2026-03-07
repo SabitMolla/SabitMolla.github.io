@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist -b main -r https://github.com/SabitMolla/SabitMolla.github.io.git"
+    "deploy": "gh-pages -d dist -b main"
   },
   "dependencies": {
     "jspdf": "^4.0.0",
