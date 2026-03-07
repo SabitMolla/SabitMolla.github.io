@@ -1,65 +1,36 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './Navbar';
+import Footer from './Footer';
 import HomePage from './HomePage';
 import ProjectsPage from './ProjectsPage';
 import AboutPage from './AboutPage';
 import ContactPage from './ContactPage';
 import BlogPage from './BlogPage';
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-      <p>Your professional introduction, immediate skills summary, and quick links to your best work.</p>
-    </div>
-  );
-}
-
-function Projects() {
-  return (
-    <div>
-      <h2>Projects</h2>
-      <p>Detailed documentation and links (GitHub, live demo) for your major technical accomplishments.</p>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-      <p>Your professional story, detailed skills breakdown, and academic/work experience history.</p>
-    </div>
-  );
-}
-
-function Contact() {
-  return (
-    <div>
-      <h2>Contact</h2>
-      <p>Simple forms and links (Email, LinkedIn, GitHub) for recruiters and collaborators to reach you easily.</p>
-    </div>
-  );
-}
+import SabrinaCutuBabu from './SabrinaCutuBabu';
 
 function App() {
   const [count, setCount] = useState(0)
+  const location = useLocation();
+  const hideNavbar = location.pathname === '/sabrinacutubabu';
 
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-      </Routes>
-    </Router>
+    <div className="flex flex-col min-h-screen">
+      {!hideNavbar && <Navbar />}
+      <main className="flex-1 w-full mx-auto">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          {/* Surprise page route (not in navbar) */}
+          <Route path="/sabrinacutubabu" element={<SabrinaCutuBabu />} />
+        </Routes>
+      </main>
+      {!hideNavbar && <Footer />}
+    </div>
   )
 }
 

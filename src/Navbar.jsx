@@ -1,139 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 function Navbar() {
   const location = useLocation();
-  // Responsive: track window width
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
-  const [menuOpen, setMenuOpen] = useState(false);
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  const isMobile = windowWidth < 700;
-
-  const navStyle = {
-    position: 'fixed',
-    top: 0,
-    left: '50%',
-    width: isMobile ? '98vw' : '100%',
-    background: '#000',
-    padding: isMobile ? '0.5rem' : '1rem',
-    zIndex: 1000,
-    display: 'flex',
-    justifyContent: 'center',
-    borderRadius: isMobile ? '0 0 24px 24px' : '0 0 50px 50px',
-    margin: '0 auto',
-    maxWidth: isMobile ? '100vw' : '800px',
-    transform: 'translateX(-50%)',
-    transition: 'box-shadow 0.4s, background 0.4s',
-    boxShadow: '0 4px 24px rgba(65,105,225,0.15)'
-  };
 
   const links = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
-    //{ to: '/blog', label: 'Blog' },
+    // { to: '/blog', label: 'Blog' },
     { to: '/projects', label: 'Works' },
-    { to: '/contact', label: 'Contacts' }
+    { to: '/contact', label: 'Contact' }
   ];
 
   return (
-    <nav style={navStyle}>
-      {isMobile && (
-        <button
-          aria-label="Open menu"
-          onClick={() => setMenuOpen((open) => !open)}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            padding: '8px',
-            marginRight: '8px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '40px',
-            width: '40px',
-          }}
-        >
-          <span style={{
-            display: 'block',
-            width: '24px',
-            height: '3px',
-            background: '#fff',
-            borderRadius: '2px',
-            margin: '3px 0',
-            transition: '0.3s'
-          }} />
-          <span style={{
-            display: 'block',
-            width: '24px',
-            height: '3px',
-            background: '#fff',
-            borderRadius: '2px',
-            margin: '3px 0',
-            transition: '0.3s'
-          }} />
-          <span style={{
-            display: 'block',
-            width: '24px',
-            height: '3px',
-            background: '#fff',
-            borderRadius: '2px',
-            margin: '3px 0',
-            transition: '0.3s'
-          }} />
-        </button>
-      )}
-      <div
-        style={{
-          display: isMobile ? (menuOpen ? 'flex' : 'none') : 'flex',
-          gap: isMobile ? '0.5rem' : '1rem',
-          flexDirection: isMobile ? 'column' : 'row',
-          alignItems: 'center',
-          background: isMobile ? '#000' : 'transparent',
-          position: isMobile ? 'absolute' : 'static',
-          top: isMobile ? '56px' : undefined,
-          left: 0,
-          right: 0,
-          width: isMobile ? '100%' : undefined,
-          padding: isMobile ? '1rem 0' : undefined,
-          borderRadius: isMobile ? '0 0 24px 24px' : undefined,
-          boxShadow: isMobile && menuOpen ? '0 8px 32px rgba(39,64,139,0.18)' : undefined,
-        }}
-      >
-        {links.map(link => {
-          const isActive = location.pathname === link.to;
-          return (
-            <Link
-              key={link.to}
-              to={link.to}
-              onClick={() => isMobile && setMenuOpen(false)}
-              style={{
-                background: isActive ? '#27408B' : '#4169E1',
-                color: 'white',
-                padding: isMobile ? (isActive ? '10px 18px' : '8px 14px') : (isActive ? '14px 32px' : '10px 25px'),
-                borderRadius: '25px',
-                textDecoration: 'none',
-                fontSize: isMobile ? (isActive ? '16px' : '15px') : (isActive ? '18px' : '16px'),
-                fontWeight: 'bold',
-                boxShadow: isActive ? '0 6px 24px rgba(65,105,225,0.25)' : 'none',
-                transform: isActive ? (isMobile ? 'none' : 'translateY(-6px)') : 'none',
-                transition: 'all 0.3s',
-                textAlign: 'center',
-                minWidth: isMobile ? '90px' : undefined
-              }}
-            >
-              {link.label}
-            </Link>
-          );
-        })}
+    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 md:px-20 lg:px-40 py-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+      <div className="flex items-center gap-3 text-primary">
+        <div className="size-8 flex items-center justify-center bg-primary/10 rounded-lg">
+          <span className="material-symbols-outlined text-primary">terminal</span>
+        </div>
+        <h2 className="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">Portfolio</h2>
       </div>
-    </nav>
+
+      <div className="flex flex-1 justify-end gap-8 items-center">
+        <nav className="hidden md:flex items-center gap-9">
+          {links.map((link) => {
+            const isActive = location.pathname === link.to;
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`${isActive
+                    ? 'text-primary font-bold border-b-2 border-primary pb-1'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors'
+                  }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <a
+          href="/Portfolio/CV.pdf"
+          download
+          className="flex min-w-[100px] cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-primary text-white text-sm font-bold transition-all hover:opacity-90 active:scale-95 shadow-lg shadow-primary/25"
+        >
+          <span className="truncate">Resume</span>
+        </a>
+      </div>
+    </header>
   );
 }
 
 export default Navbar;
+

@@ -2,15 +2,6 @@ import React from 'react';
 import { jsPDF } from 'jspdf';
 
 function ContactPage() {
-  // Responsive: track window width
-  const [windowWidth, setWindowWidth] = React.useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
-  React.useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  const isMobile = windowWidth < 700;
-
   // Generate Resume PDF from site content
   const handleDownloadResume = React.useCallback(() => {
     const doc = new jsPDF({ unit: 'pt', format: 'a4' });
@@ -135,83 +126,145 @@ function ContactPage() {
   }, []);
 
   return (
-    <div style={{
-      marginTop: isMobile ? '60px' : '120px',
-      padding: isMobile ? '1.2rem' : '2.5rem',
-      background: 'linear-gradient(135deg, #2d2d2d 80%, #27408B 100%)',
-      borderRadius: isMobile ? '18px' : '32px',
-      boxShadow: '0 8px 32px rgba(39,64,139,0.18)',
-      transform: isMobile ? 'scale(1.01) translateY(-4px)' : 'scale(1.04) translateY(-8px)',
-      transition: 'all 0.4s',
-      maxWidth: isMobile ? '98vw' : '900px',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      textAlign: isMobile ? 'center' : 'left',
-    }}>
-      <h2>Contact</h2>
-      <p>For recruiters and collaborators to reach me easily.</p>
+    <div className="w-full flex flex-col items-center bg-background-light dark:bg-background-dark min-h-screen py-10 px-6 md:px-20 lg:px-40">
+      <div className="layout-content-container flex flex-col max-w-[960px] w-full flex-1 gap-12">
 
-      {/* contact icons */}
-      <div style={{
-        display: 'flex',
-        flexDirection: isMobile ? 'column' : 'row',
-        alignItems: 'center',
-        justifyContent: isMobile ? 'center' : 'flex-start',
-        gap: isMobile ? '0.6rem' : '1rem',
-        marginTop: '1rem'
-      }}>
-        {/* Facebook */}
-        <a href="https://www.facebook.com/sabit.molla.92" target="_blank" rel="noopener noreferrer" title="Facebook">
-          <img src="https://img.icons8.com/ios-filled/48/ffffff/facebook-new.png" alt="Facebook" style={{width: isMobile ? 40 : 48, height: isMobile ? 40 : 48}} />
-        </a>
+        {/* Header Section */}
+        <section className="flex flex-col gap-6 items-center text-center">
+          <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-4 border mb-2 shadow-lg shadow-primary/20">
+            <span className="material-symbols-outlined text-5xl text-primary">forum</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-slate-100 tracking-tight">Let's Connect</h1>
+          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
+            Whether you have a question, a project to discuss, or just want to say hi, my inbox is open. I’ll try my best to get back to you!
+          </p>
+        </section>
 
-        {/* Instagram */}
-        <a href="https://www.instagram.com/sabitmolla___12/" target="_blank" rel="noopener noreferrer" title="Instagram">
-          <img src="https://img.icons8.com/ios-filled/48/ffffff/instagram-new.png" alt="Instagram" style={{width: isMobile ? 40 : 48, height: isMobile ? 40 : 48}} />
-        </a>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 mt-8">
 
-        {/* WhatsApp (replace with your number) */}
-        <a href="https://wa.me/+8801833797597" target="_blank" rel="noopener noreferrer" title="WhatsApp">
-          <img src="https://img.icons8.com/ios-filled/48/ffffff/whatsapp.png" alt="WhatsApp" style={{width: isMobile ? 40 : 48, height: isMobile ? 40 : 48}} />
-        </a>
+          {/* Main Contact Form / Info container */}
+          <div className="bg-slate-50 dark:bg-slate-900/50 rounded-2xl p-8 lg:p-10 border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none flex flex-col gap-8">
+            <h2 className="text-2xl font-bold flex items-center gap-2">
+              <span className="material-symbols-outlined text-primary">send</span>
+              Drop a Message
+            </h2>
 
-        {/* Email (replace with your email) */}
-        <a href="mailto:msabit212167@bscse.uiu.ac.bd" title="Email">
-          <img src="https://img.icons8.com/ios-filled/48/ffffff/new-post.png" alt="Email" style={{width: isMobile ? 40 : 48, height: isMobile ? 40 : 48}} />
-        </a>
+            <form className="flex flex-col gap-6">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="name" className="text-sm font-bold text-slate-700 dark:text-slate-300">Your Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="John Doe"
+                  className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-slate-400"
+                />
+              </div>
 
-        {/* GitHub */}
-        <a href="https://github.com/SabitMolla" target="_blank" rel="noopener noreferrer" title="GitHub">
-          <img src="https://img.icons8.com/ios-glyphs/48/ffffff/github.png" alt="GitHub" style={{width: isMobile ? 40 : 48, height: isMobile ? 40 : 48}} />
-        </a>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="email" className="text-sm font-bold text-slate-700 dark:text-slate-300">Your Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="john@example.com"
+                  className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-slate-400"
+                />
+              </div>
 
-        {/* LinkedIn placeholder - replace with your LinkedIn URL */}
-        <a href="https://www.linkedin.com/in/mollamdsabit/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-          <img src="https://img.icons8.com/ios-filled/48/ffffff/linkedin.png" alt="LinkedIn" style={{width: isMobile ? 40 : 48, height: isMobile ? 40 : 48}} />
-        </a>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="message" className="text-sm font-bold text-slate-700 dark:text-slate-300">Message</label>
+                <textarea
+                  id="message"
+                  rows="5"
+                  placeholder="How can we help you?"
+                  className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-y placeholder:text-slate-400"
+                />
+              </div>
 
-        {/* force next items to a new line within flex container */}
-        <div style={{ flexBasis: '100%', height: 0 }} />
+              <button
+                type="submit"
+                className="w-full py-4 mt-2 bg-primary text-white font-bold rounded-xl hover:bg-primary-hover shadow-lg shadow-primary/30 transition-all hover:-translate-y-1 active:translate-y-0 flex justify-center items-center gap-2"
+              >
+                <span className="material-symbols-outlined text-xl">near_me</span>
+                Send Message
+              </button>
+            </form>
+          </div>
 
-        {/* Download Resume Button */}
-        <div style={{ flexBasis: '100%', display: 'flex', justifyContent: isMobile ? 'center' : 'flex-start' }}>
-          <button
-            aria-label="Download Resume as PDF"
-            onClick={handleDownloadResume}
-            style={{
-              marginTop: isMobile ? '0.5rem' : '0.75rem',
-              padding: isMobile ? '10px 14px' : '12px 18px',
-              background: 'linear-gradient(135deg, #4ea1ff, #27408B)',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '12px',
-              cursor: 'pointer',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.15)'
-            }}
-          >
-            Download Resume (PDF)
-          </button>
+          {/* Socials & Info */}
+          <div className="flex flex-col gap-8 justify-center">
+
+            <div className="bg-primary text-white rounded-2xl p-8 lg:p-10 shadow-xl shadow-primary/20 flex flex-col gap-6 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl transform translate-x-10 -translate-y-10"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/10 rounded-full blur-3xl transform -translate-x-10 translate-y-10"></div>
+
+              <h3 className="text-2xl font-bold relative z-10 flex items-center gap-2">
+                <span className="material-symbols-outlined">contact_page</span>
+                Get Resume
+              </h3>
+              <p className="text-primary-light relative z-10">
+                Download my full resume to see a detailed overview of my experience, education, and technical skills.
+              </p>
+              <div className="mt-auto relative z-10">
+                <button
+                  onClick={handleDownloadResume}
+                  className="w-full py-4 bg-white text-primary font-bold rounded-xl hover:bg-slate-50 transition-all flex justify-center items-center gap-2"
+                >
+                  <span className="material-symbols-outlined">download</span>
+                  Download PDF
+                </button>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-6">
+              <h3 className="text-xl font-bold border-b border-slate-200 dark:border-slate-800 pb-3">Social Profiles</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <a href="https://github.com/SabitMolla" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700">
+                  <img src="https://img.icons8.com/ios-glyphs/48/4ea1ff/github.png" alt="GitHub" className="w-8 h-8 filter dark:invert" />
+                  <span className="font-bold text-sm">GitHub</span>
+                </a>
+
+                <a href="https://www.linkedin.com/in/mollamdsabit/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700">
+                  <img src="https://img.icons8.com/ios-filled/48/4ea1ff/linkedin.png" alt="LinkedIn" className="w-8 h-8 filter dark:invert" />
+                  <span className="font-bold text-sm">LinkedIn</span>
+                </a>
+
+                <a href="https://www.facebook.com/sabit.molla.92" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700">
+                  <img src="https://img.icons8.com/ios-filled/48/4ea1ff/facebook-new.png" alt="Facebook" className="w-8 h-8 filter dark:invert" />
+                  <span className="font-bold text-sm">Facebook</span>
+                </a>
+
+                <a href="https://www.instagram.com/sabitmolla___12/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700">
+                  <img src="https://img.icons8.com/ios-filled/48/4ea1ff/instagram-new.png" alt="Instagram" className="w-8 h-8 filter dark:invert" />
+                  <span className="font-bold text-sm">Instagram</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Direct Contact */}
+            <div className="flex flex-col gap-4 mt-2">
+              <a href="mailto:msabit212167@bscse.uiu.ac.bd" className="flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                  <span className="material-symbols-outlined">mail</span>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Email Me</p>
+                  <p className="font-medium">msabit212167@bscse.uiu.ac.bd</p>
+                </div>
+              </a>
+              <a href="https://wa.me/+8801833797597" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-colors">
+                  <span className="material-symbols-outlined">chat</span>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">WhatsApp</p>
+                  <p className="font-medium">+8801833797597</p>
+                </div>
+              </a>
+            </div>
+
+          </div>
         </div>
+
       </div>
     </div>
   );
