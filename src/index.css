@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Override Tailwind v4 dark mode to use class-based instead of prefers-color-scheme */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source "./index.html";
 @source "./src/**/*.{js,ts,jsx,tsx}";
 
