@@ -1,6 +1,8 @@
 import React from 'react';
+import useDocumentTitle from './useDocumentTitle';
 
 export default function BlogPage() {
+  useDocumentTitle('Blog | Molla MD Sabit');
   const posts = [
     {
       id: 1,

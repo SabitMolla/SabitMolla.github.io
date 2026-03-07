@@ -1,7 +1,9 @@
 import React from 'react';
 import { jsPDF } from 'jspdf';
+import useDocumentTitle from './useDocumentTitle';
 
 function ContactPage() {
+  useDocumentTitle('Contact | Molla MD Sabit');
   // Generate Resume PDF from site content
   const handleDownloadResume = React.useCallback(() => {
     const doc = new jsPDF({ unit: 'pt', format: 'a4' });

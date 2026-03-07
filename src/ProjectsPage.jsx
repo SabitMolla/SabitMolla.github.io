@@ -1,6 +1,8 @@
 import { useState } from "react";
+import useDocumentTitle from './useDocumentTitle';
 
 function ProjectsPage() {
+  useDocumentTitle('Projects | Molla MD Sabit');
   const [activeTab, setActiveTab] = useState('All');
 
   const tabs = ['All', 'Academic', 'Commercial', 'Research'];
@@ -28,8 +30,8 @@ function ProjectsPage() {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`flex flex-col items-center justify-center pb-4 pt-2 transition-all border-b-[3px] ${activeTab === tab
-                    ? 'border-primary text-slate-900 dark:text-slate-100'
-                    : 'border-transparent text-slate-500 hover:text-primary'
+                  ? 'border-primary text-slate-900 dark:text-slate-100'
+                  : 'border-transparent text-slate-500 hover:text-primary'
                   }`}
               >
                 <p className="text-sm font-bold leading-normal tracking-[0.015em]">{tab}</p>

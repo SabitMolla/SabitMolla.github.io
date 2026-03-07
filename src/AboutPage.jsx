@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import useDocumentTitle from './useDocumentTitle';
 
 function ExpandableBox({ title, preview, children }) {
   const [expanded, setExpanded] = useState(false);
@@ -46,6 +47,7 @@ function ExpandableBox({ title, preview, children }) {
 }
 
 function AboutPage() {
+  useDocumentTitle('About | Molla MD Sabit');
   return (
     <div className="w-full flex flex-col items-center py-12 px-6 lg:px-40">
       <div className="max-w-[960px] mx-auto space-y-16 w-full">

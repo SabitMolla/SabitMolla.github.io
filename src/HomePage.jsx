@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useDocumentTitle from './useDocumentTitle';
 
 function HomePage() {
+  useDocumentTitle('Molla MD Sabit | Software Engineer & Researcher');
   return (
     <div className="w-full flex flex-col items-center">
       <div className="layout-content-container flex flex-col max-w-[1200px] w-full flex-1">
