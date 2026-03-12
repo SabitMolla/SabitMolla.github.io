@@ -92,7 +92,7 @@ function HomePage() {
         </section>
 
         {/* Featured Projects Header */}
-        <section className="py-12 px-4 mb-20">
+        {/*<section className="py-12 px-4 mb-20">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
             <div>
               <h2 className="text-slate-900 dark:text-white text-3xl font-bold leading-tight tracking-tight">Featured Projects</h2>
@@ -104,7 +104,7 @@ function HomePage() {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Project 1 */}
+            /* Project 1 
             <div className="group relative overflow-hidden rounded-3xl bg-slate-100 dark:bg-slate-800">
               <div className="aspect-video w-full overflow-hidden">
                 <img alt="Analytics Dashboard" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Modern dark analytics dashboard with colorful charts" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVgHwIbBzja7QPyGlRBBrCFiWc1DVdCJkrZeSxxn4gH0Ld3TxIWOnm80IkyVwDApO1gil9gc16e-Rdxk7-yUbbWbrlcZZWQx43HLXVcFUwcLA9f_KpXkhhRFa0sPAHOF0nowuwMlO-We0TJhb5aEwKZdDC5fy8_eFgTX6kCG4mdnNGX9QbrZWNgFTdWfrapRKUX3mFNaiOCx0kK1YHyXsfu2g8fuw4afvjqsDdv_Sv5lw4ZNHhQdM2vd_kokcJrjP9gOJqvPdGFLi8" />
@@ -123,7 +123,7 @@ function HomePage() {
               </div>
             </div>
 
-            {/* Project 2 */}
+            {/* Project 2 
             <div className="group relative overflow-hidden rounded-3xl bg-slate-100 dark:bg-slate-800">
               <div className="aspect-video w-full overflow-hidden">
                 <img alt="Security System" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Digital encryption and security lock visual" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlTOw7fPnU4STonkivigRQBxBJl4zdDH934rXUDodLdDzUqoPQGKkyMw_2BuUkVcy3WhBZNvIGy3OM1OA-0Oq2L8dRcMvCcr1F-2Z_L5LoDbCQQv9cLw2OfOoZQ5lu4xGeH88Py3RCFAJ82W0AwwCYxo9J3gHEXRjBYrsltAmQ8L1-ZxJJ651mh4vX2GUzN26jndBQ5J4T4ZENSmFdmk5Ej_Py-cCvtJp2lR55k1QKxvfeEHnHiVjFf_FvXcZtFbAqedZBiFxNGcpT" />
@@ -142,7 +142,7 @@ function HomePage() {
               </div>
             </div>
           </div>
-        </section>
+        </section>*/}
       </div>
     </div>
   );
