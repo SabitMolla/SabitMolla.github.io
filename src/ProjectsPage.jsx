@@ -1,8 +1,7 @@
 import { useState } from "react";
-import useDocumentTitle from './useDocumentTitle';
+import { motion } from "framer-motion";
 
 function ProjectsPage() {
-  useDocumentTitle('Projects | Molla MD Sabit');
   const [activeTab, setActiveTab] = useState('All');
 
   const tabs = ['All', 'Academic', 'Commercial', 'Research'];
@@ -12,7 +11,13 @@ function ProjectsPage() {
       <div className="layout-content-container flex flex-col max-w-[1200px] w-full flex-1">
 
         {/* Hero Section */}
-        <div className="flex flex-wrap justify-between items-end gap-6 mb-12">
+        <motion.div 
+          className="flex flex-wrap justify-between items-end gap-6 mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="flex min-w-72 flex-col gap-3">
             <p className="text-slate-900 dark:text-slate-100 text-5xl font-black leading-tight tracking-[-0.033em]">Creative Works</p>
             <p className="text-slate-600 dark:text-slate-400 text-lg font-normal leading-relaxed max-w-2xl">
@@ -20,7 +25,7 @@ function ProjectsPage() {
               Built with precision, performance, and modern technologies.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Filters Tab */}
         <div className="mb-10">
@@ -45,7 +50,13 @@ function ProjectsPage() {
 
           {/* Internal University Project 1 */}
           {(activeTab === 'All' || activeTab === 'Academic') && (
-            <div className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5">
+            <motion.div 
+              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="p-6 h-full flex flex-col">
                 <div className="flex gap-2 mb-3">
                   <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary rounded">Academic (2025)</span>
@@ -56,12 +67,18 @@ function ProjectsPage() {
                   Created a web application and it's mobile app version for the farmer. Where farmer upload their crops and find what kind of diseases they have. And can chat with a chat model.
                 </p>
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Internal University Project 2 */}
           {(activeTab === 'All' || activeTab === 'Academic') && (
-            <div className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5">
+            <motion.div 
+              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="p-6 h-full flex flex-col">
                 <div className="flex gap-2 mb-3">
                   <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary rounded">Academic (2024)</span>
@@ -71,12 +88,18 @@ function ProjectsPage() {
                   Created a web application for crowedfounding and loan for the UIU studets.
                 </p>
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Internal University Project 3 */}
           {(activeTab === 'All' || activeTab === 'Academic') && (
-            <div className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5">
+            <motion.div 
+              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="p-6 h-full flex flex-col">
                 <div className="flex gap-2 mb-3">
                   <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary rounded">Academic (2023)</span>
@@ -87,12 +110,18 @@ function ProjectsPage() {
                   Developed a smart drone capable of detecting humans using computer vision. This drone can be utilized during disaster scenarios to assist in rescue operations.
                 </p>
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Internal University Project 4 */}
           {(activeTab === 'All' || activeTab === 'Academic') && (
-            <div className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5">
+            <motion.div 
+              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="p-6 h-full flex flex-col">
                 <div className="flex gap-2 mb-3">
                   <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary rounded">Academic (2022)</span>
@@ -103,12 +132,18 @@ function ProjectsPage() {
                   Developed a smart shoe project that alerts the user if they step on a mine. Built using Raspberry Pi, the system detects when the user steps on metallic objects and sends a signal for safety. In case of stepping on a mine, plaster of Paris can be used to secure the shoe to the mine, preventing accidental detonation.
                 </p>
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Internal University Project 5 */}
           {(activeTab === 'All' || activeTab === 'Academic') && (
-            <div className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5">
+            <motion.div 
+              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="p-6 h-full flex flex-col">
                 <div className="flex gap-2 mb-3">
                   <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary rounded">Academic (2021)</span>
@@ -119,12 +154,18 @@ function ProjectsPage() {
                   Developed a application for communicating between UIU student and teachers build in java.
                 </p>
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Commercial 1 */}
           {(activeTab === 'All' || activeTab === 'Commercial') && (
-            <div className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5">
+            <motion.div 
+              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="relative w-full aspect-video overflow-hidden">
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center gap-4">
                   <a className="p-3 bg-slate-900 text-white rounded-full hover:bg-primary transition-colors" href="https://scholarsconsultingltd.com/#home" target="_blank" rel="noopener noreferrer">
@@ -149,12 +190,18 @@ function ProjectsPage() {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Commercial 2 */}
           {(activeTab === 'All' || activeTab === 'Commercial') && (
-            <div className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5">
+            <motion.div 
+              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="relative w-full aspect-video overflow-hidden">
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center gap-4">
                   <a className="p-3 bg-slate-900 text-white rounded-full hover:bg-primary transition-colors" href="https://furnituredots.com/" target="_blank" rel="noopener noreferrer">
@@ -179,12 +226,18 @@ function ProjectsPage() {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Research 1 */}
           {(activeTab === 'All' || activeTab === 'Research') && (
-            <div className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5">
+            <motion.div 
+              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="p-6 h-full flex flex-col">
                 <div className="flex gap-2 mb-3">
                   <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-violet-500/10 text-violet-500 rounded">Research (2025)</span>
@@ -200,12 +253,18 @@ function ProjectsPage() {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Research 2 */}
           {(activeTab === 'All' || activeTab === 'Research') && (
-            <div className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5">
+            <motion.div 
+              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="p-6 h-full flex flex-col">
                 <div className="flex gap-2 mb-3">
                   <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-violet-500/10 text-violet-500 rounded">Research (2025)</span>
@@ -218,7 +277,7 @@ function ProjectsPage() {
                   <span className="italic text-xs">(IEEE RAAICON paper already accepted and presented in the conference, pending publication)</span>
                 </p>
               </div>
-            </div>
+            </motion.div>
           )}
 
         </div>

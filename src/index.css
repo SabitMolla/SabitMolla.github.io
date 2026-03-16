@@ -20,6 +20,9 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased m-0 min-w-[320px] min-h-screen box-border overflow-x-hidden;
   }

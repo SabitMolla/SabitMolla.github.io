@@ -1,9 +1,8 @@
 import React from 'react';
 import { jsPDF } from 'jspdf';
-import useDocumentTitle from './useDocumentTitle';
+import { motion } from 'framer-motion';
 
 function ContactPage() {
-  useDocumentTitle('Contact | Molla MD Sabit');
   // Generate Resume PDF from site content
   const handleDownloadResume = React.useCallback(() => {
     const doc = new jsPDF({ unit: 'pt', format: 'a4' });
@@ -132,7 +131,13 @@ function ContactPage() {
       <div className="layout-content-container flex flex-col max-w-[960px] w-full flex-1 gap-12">
 
         {/* Header Section */}
-        <section className="flex flex-col gap-6 items-center text-center">
+        <motion.section 
+          className="flex flex-col gap-6 items-center text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-4 border mb-2 shadow-lg shadow-primary/20">
             <span className="material-symbols-outlined text-5xl text-primary">forum</span>
           </div>
@@ -140,12 +145,18 @@ function ContactPage() {
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
             Whether you have a question, a project to discuss, or just want to say hi, my inbox is open. I’ll try my best to get back to you!
           </p>
-        </section>
+        </motion.section>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 mt-8">
 
           {/* Main Contact Form / Info container */}
-          <div className="bg-slate-50 dark:bg-slate-900/50 rounded-2xl p-8 lg:p-10 border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none flex flex-col gap-8">
+          <motion.div 
+            className="bg-slate-50 dark:bg-slate-900/50 rounded-2xl p-8 lg:p-10 border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none flex flex-col gap-8"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+          >
             <h2 className="text-2xl font-bold flex items-center gap-2">
               <span className="material-symbols-outlined text-primary">send</span>
               Drop a Message
@@ -190,10 +201,16 @@ function ContactPage() {
                 Send Message
               </button>
             </form>
-          </div>
+          </motion.div>
 
           {/* Socials & Info */}
-          <div className="flex flex-col gap-8 justify-center">
+          <motion.div 
+            className="flex flex-col gap-8 justify-center"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+          >
 
             <div className="bg-primary text-white rounded-2xl p-8 lg:p-10 shadow-xl shadow-primary/20 flex flex-col gap-6 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl transform translate-x-10 -translate-y-10"></div>
@@ -264,7 +281,7 @@ function ContactPage() {
               </a>
             </div>
 
-          </div>
+          </motion.div>
         </div>
 
       </div>

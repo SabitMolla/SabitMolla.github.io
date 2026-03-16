@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import useDocumentTitle from './useDocumentTitle';
+import { motion } from "framer-motion";
 
 function ExpandableBox({ title, preview, children }) {
   const [expanded, setExpanded] = useState(false);
@@ -47,12 +47,17 @@ function ExpandableBox({ title, preview, children }) {
 }
 
 function AboutPage() {
-  useDocumentTitle('About | Molla MD Sabit');
   return (
     <div className="w-full flex flex-col items-center py-12 px-6 lg:px-40">
       <div className="max-w-[960px] mx-auto space-y-16 w-full">
         {/* Hero/Profile Section */}
-        <section className="flex flex-col md:flex-row gap-10 items-center md:items-start">
+        <motion.section 
+          className="flex flex-col md:flex-row gap-10 items-center md:items-start"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <div className="shrink-0">
             <div
               className="bg-center bg-no-repeat aspect-square bg-cover rounded-2xl w-48 h-48 lg:w-56 lg:h-56 shadow-2xl shadow-primary/10 border-4 border-slate-100 dark:border-slate-800"
@@ -77,10 +82,15 @@ function AboutPage() {
               </Link>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Professional Bio */}
-        <section>
+        <motion.section
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <div className="flex items-center gap-3 mb-6">
             <span className="material-symbols-outlined text-primary">person</span>
             <h2 className="text-2xl font-bold">Personal & Professional Bio</h2>
@@ -132,10 +142,15 @@ function AboutPage() {
               </p>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Technical Skills */}
-        <section>
+        <motion.section
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <div className="flex items-center gap-3 mb-8">
             <span className="material-symbols-outlined text-primary">psychology</span>
             <h2 className="text-2xl font-bold">Technical Skills</h2>
@@ -188,10 +203,15 @@ function AboutPage() {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Education */}
-        <section>
+        <motion.section
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <div className="flex items-center gap-3 mb-8">
             <span className="material-symbols-outlined text-primary">school</span>
             <h2 className="text-2xl font-bold">Education History</h2>
@@ -226,7 +246,7 @@ function AboutPage() {
             </p>
             <p className="mt-2 text-primary font-bold">GPA: 4.78/5.00</p>
           </ExpandableBox>
-        </section>
+        </motion.section>
       </div>
     </div>
   );
