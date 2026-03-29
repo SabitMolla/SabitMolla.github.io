@@ -57,7 +57,7 @@ function HomePage() {
                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
               >
                 <div className="relative aspect-square rounded-3xl overflow-hidden bg-slate-200 dark:bg-slate-800 shadow-2xl">
-                  <img alt="Technology visualization" className="w-full h-full object-cover opacity-80 mix-blend-overlay dark:mix-blend-normal" data-alt="Abstract blue glowing digital circuit board pattern" src="/Portfolio/Profile.jpg" />
+                  <img alt="Technology visualization" className="w-full h-full object-cover opacity-80 mix-blend-overlay dark:mix-blend-normal" data-alt="Abstract blue glowing digital circuit board pattern" src="/Profile.jpg" />
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 to-transparent"></div>
                 </div>
               </motion.div>

@@ -61,7 +61,7 @@ function AboutPage() {
           <div className="shrink-0">
             <div
               className="bg-center bg-no-repeat aspect-square bg-cover rounded-2xl w-48 h-48 lg:w-56 lg:h-56 shadow-2xl shadow-primary/10 border-4 border-slate-100 dark:border-slate-800"
-              style={{ backgroundImage: 'url("/Portfolio/Profile.jpg")' }}
+              style={{ backgroundImage: 'url("/Profile.jpg")' }}
             />
           </div>
           <div className="flex flex-col justify-center text-center md:text-left">
