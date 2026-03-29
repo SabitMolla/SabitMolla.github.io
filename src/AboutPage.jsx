@@ -72,7 +72,7 @@ function AboutPage() {
               <span className="text-sm">Dhaka, Bangladesh</span>
             </div>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-              <a href="/Portfolio/CV.pdf" download className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
+              <a href="/CV_MollaMDSabit.pdf" download className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
                 <span className="material-symbols-outlined text-sm">download</span>
                 <span>Download CV</span>
               </a>
