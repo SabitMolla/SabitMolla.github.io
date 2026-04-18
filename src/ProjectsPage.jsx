@@ -61,11 +61,19 @@ function ProjectsPage() {
                 <div className="flex gap-2 mb-3">
                   <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary rounded">Academic (2025)</span>
                   <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-500 rounded">React Native</span>
+                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-500 rounded">Django</span>
                 </div>
                 <h3 className="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Agri Tech App</h3>
                 <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-                  Created a web application and it's mobile app version for the farmer. Where farmer upload their crops and find what kind of diseases they have. And can chat with a chat model.
+                  Created a web application and it's mobile app version for the farmer. 
+                  Where farmer upload their crops and find what kind of diseases they have. 
+                  And can chat with a chat model.
                 </p>
+                <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
+                  <a className="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all" href="https://drive.google.com/file/d/1n7JCbcYV137yIutyuv4qQF7HbiCCrDm7/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                    View Documentation <span className="material-symbols-outlined text-sm">open_in_new</span>
+                  </a>
+                </div>
               </div>
             </motion.div>
           )}
@@ -276,6 +284,11 @@ function ProjectsPage() {
                   <br /><br />
                   <span className="italic text-xs">(IEEE RAAICON paper already accepted and presented in the conference, pending publication)</span>
                 </p>
+                <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
+                  <a className="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all" href="https://drive.google.com/file/d/1VPSYufQ4dAEqM5F4YEpZ3_x81TKItNZo/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+                    Read Paper <span className="material-symbols-outlined text-sm">open_in_new</span>
+                  </a>
+                </div>
               </div>
             </motion.div>
           )}
