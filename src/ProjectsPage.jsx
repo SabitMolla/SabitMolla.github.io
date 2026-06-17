@@ -1,10 +1,232 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
+
+// Helper to loop/wrap values smoothly
+const wrap = (min, max, value) => {
+  const range = max - min;
+  return ((((value - min) % range) + range) % range) + min;
+};
+
+const projectsData = [
+  {
+    id: 1,
+    title: "Agri Tech App",
+    category: "Academic",
+    year: "2025",
+    tags: [
+      { text: "React Native", className: "bg-emerald-500/10 text-emerald-500" },
+      { text: "Django", className: "bg-emerald-500/10 text-emerald-500" }
+    ],
+    description: "Created a web application and its mobile app version for the farmer, allowing crop uploads, disease diagnosis, and integration with an AI chat model.",
+    link: "https://drive.google.com/file/d/1n7JCbcYV137yIutyuv4qQF7HbiCCrDm7/view?usp=sharing",
+    linkLabel: "View Documentation",
+    icon: "open_in_new"
+  },
+  {
+    id: 2,
+    title: "UIU Crowdfunding platform",
+    category: "Academic",
+    year: "2024",
+    tags: [],
+    description: "Created a web application for crowdfunding and educational loans tailored for UIU students."
+  },
+  {
+    id: 3,
+    title: "Search & Rescue Drone",
+    category: "Academic",
+    year: "2023",
+    tags: [
+      { text: "CV", className: "bg-purple-500/10 text-purple-500" }
+    ],
+    description: "Developed a smart drone capable of detecting humans using computer vision. This drone can be utilized during disaster scenarios to assist in rescue operations."
+  },
+  {
+    id: 4,
+    title: "Smart Safety Shoe",
+    category: "Academic",
+    year: "2022",
+    tags: [
+      { text: "IoT", className: "bg-sky-500/10 text-sky-500" }
+    ],
+    description: "Developed a smart shoe project that alerts the user if they step on a mine. Built using Raspberry Pi, the system detects metallic objects and sends safety signals. In case of mine stepping, plaster of Paris can secure the shoe to prevent detonation."
+  },
+  {
+    id: 5,
+    title: "UIU Comm",
+    category: "Academic",
+    year: "2021",
+    tags: [
+      { text: "Java", className: "bg-orange-500/10 text-orange-500" }
+    ],
+    description: "Developed a communication application for UIU students and teachers built in Java."
+  },
+  {
+    id: 6,
+    title: "Scholars Consulting Ltd",
+    category: "Commercial",
+    year: "2025",
+    tags: [],
+    description: "Developed a professional website for a manpower agency company.",
+    link: "https://scholarsconsultingltd.com/#home",
+    linkLabel: "View Project",
+    icon: "arrow_forward",
+    mediaIcon: "language"
+  },
+  {
+    id: 7,
+    title: "FurnitureDots",
+    category: "Commercial",
+    year: "2025",
+    tags: [],
+    description: "Built a modern, responsive e-commerce website for furniture sales.",
+    link: "https://furnituredots.com/",
+    linkLabel: "View Project",
+    icon: "arrow_forward",
+    mediaIcon: "shopping_cart"
+  },
+  {
+    id: 8,
+    title: "JailbreakTracer",
+    category: "Research",
+    year: "2025",
+    tags: [
+      { text: "IEEE Q1", className: "bg-yellow-500/10 text-yellow-500" }
+    ],
+    description: "Explainable detection of jailbreaking prompts in LLMs using synthetic data generation (IEEE Q1 publication).",
+    link: "https://www.researchgate.net/publication/392749895_JailbreakTracer_Explainable_Detection_of_Jailbreaking_Prompts_in_LLMs_Using_Synthetic_Data_Generation",
+    linkLabel: "Read Paper",
+    icon: "open_in_new"
+  },
+  {
+    id: 9,
+    title: "Rice Leaf Disease Detection",
+    category: "Research",
+    year: "2025",
+    tags: [
+      { text: "IEEE", className: "bg-sky-500/10 text-sky-500" }
+    ],
+    description: "A hybrid deep learning framework for rice leaf disease detection and classification using DenseNet201 and YOLOv8.\n\n(IEEE RAAICON paper already accepted and presented in the conference, pending publication)",
+    link: "https://drive.google.com/file/d/1VPSYufQ4dAEqM5F4YEpZ3_x81TKItNZo/view?usp=drive_link",
+    linkLabel: "Read Paper",
+    icon: "open_in_new"
+  },
+  {
+    id: 10,
+    title: "Neon Flow Game",
+    category: "Commercial",
+    year: "2026",
+    tags: [],
+    description: "Neon Flow is a fast-paced, neon-themed 2D platformer available in playstore",
+    link: "https://play.google.com/store/apps/details?id=com.neonflow.sabit.game&pcampaignid=web_share",
+    linkLabel: "View Project",
+    icon: "arrow_forward",
+    mediaIcon: "games"
+  }
+];
+
+const getCategoryColor = (category) => {
+  switch (category) {
+    case 'Academic': return 'bg-primary/10 text-primary';
+    case 'Commercial': return 'bg-emerald-500/10 text-emerald-500';
+    case 'Research': return 'bg-violet-500/10 text-violet-500';
+    default: return 'bg-slate-500/10 text-slate-500';
+  }
+};
+
+const ProjectCard = ({ project }) => {
+  return (
+    <div className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5 h-full">
+      {project.mediaIcon && (
+        <div className="relative w-full aspect-video overflow-hidden flex-shrink-0">
+          <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center gap-4">
+            <a className="p-3 bg-slate-900 text-white rounded-full hover:bg-primary transition-colors cursor-pointer" href={project.link} target="_blank" rel="noopener noreferrer">
+              <span className="material-symbols-outlined text-xl">link</span>
+            </a>
+          </div>
+          <div className="w-full h-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+            <span className="material-symbols-outlined text-4xl text-slate-400">{project.mediaIcon}</span>
+          </div>
+        </div>
+      )}
+      <div className="p-6 flex-1 flex flex-col justify-between">
+        <div>
+          <div className="flex flex-wrap gap-2 mb-3">
+            <span className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded ${getCategoryColor(project.category)}`}>
+              {project.category} ({project.year})
+            </span>
+            {project.tags && project.tags.map((tag, idx) => (
+              <span key={idx} className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded ${tag.className}`}>
+                {tag.text}
+              </span>
+            ))}
+          </div>
+          <h3 className="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">{project.title}</h3>
+          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 whitespace-pre-line">
+            {project.description}
+          </p>
+        </div>
+        
+        {project.link && (
+          <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800 mt-auto">
+            <a className="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all cursor-pointer" href={project.link} target="_blank" rel="noopener noreferrer">
+              {project.linkLabel} <span className="material-symbols-outlined text-sm">{project.icon}</span>
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 function ProjectsPage() {
   const [activeTab, setActiveTab] = useState('All');
-
   const tabs = ['All', 'Academic', 'Commercial', 'Research'];
+
+  const filteredProjects = projectsData.filter(
+    (project) => activeTab === 'All' || project.category === activeTab
+  );
+
+  // Duplicate the list 3 times to guarantee that it overflows and provides a seamless loop
+  const duplicatedProjects = [...filteredProjects, ...filteredProjects, ...filteredProjects];
+
+  const containerRef = useRef(null);
+  const [contentWidth, setContentWidth] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const baseX = useMotionValue(0);
+  const speed = 40; // Pixels per second speed
+
+  // Track and update the width of a single set of items
+  useEffect(() => {
+    if (containerRef.current) {
+      setContentWidth(containerRef.current.scrollWidth / 3);
+    }
+  }, [filteredProjects]);
+
+  // Reset scroll position on filter tab changes
+  useEffect(() => {
+    baseX.set(0);
+  }, [activeTab]);
+
+  // Handle continuous marquee animation
+  useAnimationFrame((t, delta) => {
+    if (!isDragging && !isHovered && contentWidth > 0) {
+      let nextX = baseX.get() - (speed * (delta / 1000));
+      nextX = wrap(-contentWidth, 0, nextX);
+      baseX.set(nextX);
+    }
+  });
+
+  // Handle snapping back into wrapping boundaries when user stops dragging
+  const handleDragEnd = (event, info) => {
+    setIsDragging(false);
+    if (contentWidth > 0) {
+      const currentX = baseX.get();
+      const wrappedX = wrap(-contentWidth, 0, currentX);
+      baseX.set(wrappedX);
+    }
+  };
 
   return (
     <div className="w-full flex flex-col items-center bg-background-light dark:bg-background-dark min-h-screen py-10 px-6 md:px-20 lg:px-40">
@@ -45,254 +267,35 @@ function ProjectsPage() {
           </div>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-          {/* Internal University Project 1 */}
-          {(activeTab === 'All' || activeTab === 'Academic') && (
-            <motion.div 
-              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className="p-6 h-full flex flex-col">
-                <div className="flex gap-2 mb-3">
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary rounded">Academic (2025)</span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-500 rounded">React Native</span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-500 rounded">Django</span>
-                </div>
-                <h3 className="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Agri Tech App</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-                  Created a web application and it's mobile app version for the farmer. 
-                  Where farmer upload their crops and find what kind of diseases they have. 
-                  And can chat with a chat model.
-                </p>
-                <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
-                  <a className="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all" href="https://drive.google.com/file/d/1n7JCbcYV137yIutyuv4qQF7HbiCCrDm7/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-                    View Documentation <span className="material-symbols-outlined text-sm">open_in_new</span>
-                  </a>
-                </div>
+        {/* Projects Slider Container */}
+        <div className="relative w-full overflow-hidden py-6 select-none">
+          {/* Elegant gradients to fade out edge contents */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-r from-background-light via-background-light/80 to-transparent dark:from-background-dark dark:via-background-dark/80 dark:to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-background-light via-background-light/80 to-transparent dark:from-background-dark dark:via-background-dark/80 dark:to-transparent z-10 pointer-events-none" />
+          
+          <motion.div
+            ref={containerRef}
+            className="flex gap-8 cursor-grab active:cursor-grabbing w-max items-stretch py-4"
+            style={{ x: baseX }}
+            drag="x"
+            dragConstraints={{
+              left: -contentWidth * 2,
+              right: 0,
+            }}
+            onDragStart={() => setIsDragging(true)}
+            onDragEnd={handleDragEnd}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {duplicatedProjects.map((project, idx) => (
+              <div
+                key={`${project.id}-${idx}`}
+                className="w-[320px] md:w-[380px] flex-shrink-0"
+              >
+                <ProjectCard project={project} />
               </div>
-            </motion.div>
-          )}
-
-          {/* Internal University Project 2 */}
-          {(activeTab === 'All' || activeTab === 'Academic') && (
-            <motion.div 
-              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className="p-6 h-full flex flex-col">
-                <div className="flex gap-2 mb-3">
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary rounded">Academic (2024)</span>
-                </div>
-                <h3 className="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">UIU Crowdfunding platform</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-                  Created a web application for crowedfounding and loan for the UIU studets.
-                </p>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Internal University Project 3 */}
-          {(activeTab === 'All' || activeTab === 'Academic') && (
-            <motion.div 
-              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className="p-6 h-full flex flex-col">
-                <div className="flex gap-2 mb-3">
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary rounded">Academic (2023)</span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-purple-500/10 text-purple-500 rounded">CV</span>
-                </div>
-                <h3 className="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Search & Rescue Drone</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-                  Developed a smart drone capable of detecting humans using computer vision. This drone can be utilized during disaster scenarios to assist in rescue operations.
-                </p>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Internal University Project 4 */}
-          {(activeTab === 'All' || activeTab === 'Academic') && (
-            <motion.div 
-              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className="p-6 h-full flex flex-col">
-                <div className="flex gap-2 mb-3">
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary rounded">Academic (2022)</span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-sky-500/10 text-sky-500 rounded">IoT</span>
-                </div>
-                <h3 className="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Smart Safety Shoe</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-                  Developed a smart shoe project that alerts the user if they step on a mine. Built using Raspberry Pi, the system detects when the user steps on metallic objects and sends a signal for safety. In case of stepping on a mine, plaster of Paris can be used to secure the shoe to the mine, preventing accidental detonation.
-                </p>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Internal University Project 5 */}
-          {(activeTab === 'All' || activeTab === 'Academic') && (
-            <motion.div 
-              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className="p-6 h-full flex flex-col">
-                <div className="flex gap-2 mb-3">
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary rounded">Academic (2021)</span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-orange-500/10 text-orange-500 rounded">Java</span>
-                </div>
-                <h3 className="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">UIU Comm</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-                  Developed a application for communicating between UIU student and teachers build in java.
-                </p>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Commercial 1 */}
-          {(activeTab === 'All' || activeTab === 'Commercial') && (
-            <motion.div 
-              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className="relative w-full aspect-video overflow-hidden">
-                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center gap-4">
-                  <a className="p-3 bg-slate-900 text-white rounded-full hover:bg-primary transition-colors" href="https://scholarsconsultingltd.com/#home" target="_blank" rel="noopener noreferrer">
-                    <span className="material-symbols-outlined text-xl">link</span>
-                  </a>
-                </div>
-                <div className="w-full h-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-4xl text-slate-400">language</span>
-                </div>
-              </div>
-              <div className="p-6 h-full flex flex-col">
-                <div className="flex gap-2 mb-3">
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-500 rounded">Commercial (2025)</span>
-                </div>
-                <h3 className="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Scholars Consulting Ltd</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-                  Developed a website for a Manpower agency Company.
-                </p>
-                <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
-                  <a className="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all" href="https://scholarsconsultingltd.com/#home" target="_blank" rel="noopener noreferrer">
-                    View Project <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Commercial 2 */}
-          {(activeTab === 'All' || activeTab === 'Commercial') && (
-            <motion.div 
-              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className="relative w-full aspect-video overflow-hidden">
-                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center gap-4">
-                  <a className="p-3 bg-slate-900 text-white rounded-full hover:bg-primary transition-colors" href="https://furnituredots.com/" target="_blank" rel="noopener noreferrer">
-                    <span className="material-symbols-outlined text-xl">link</span>
-                  </a>
-                </div>
-                <div className="w-full h-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-4xl text-slate-400">shopping_cart</span>
-                </div>
-              </div>
-              <div className="p-6 h-full flex flex-col">
-                <div className="flex gap-2 mb-3">
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-500 rounded">Commercial (2025)</span>
-                </div>
-                <h3 className="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">FurnitureDots</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-                  Built a modern E-commerce website for furniture sales.
-                </p>
-                <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
-                  <a className="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all" href="https://furnituredots.com/" target="_blank" rel="noopener noreferrer">
-                    View Project <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Research 1 */}
-          {(activeTab === 'All' || activeTab === 'Research') && (
-            <motion.div 
-              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className="p-6 h-full flex flex-col">
-                <div className="flex gap-2 mb-3">
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-violet-500/10 text-violet-500 rounded">Research (2025)</span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-yellow-500/10 text-yellow-500 rounded">IEEE Q1</span>
-                </div>
-                <h3 className="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">JailbreakTracer</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-                  Explainable Detection of Jailbreaking Prompts in LLMs Using Synthetic Data Generation (It's an IEEE Q1 Paper)
-                </p>
-                <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
-                  <a className="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all" href="https://www.researchgate.net/publication/392749895_JailbreakTracer_Explainable_Detection_of_Jailbreaking_Prompts_in_LLMs_Using_Synthetic_Data_Generation" target="_blank" rel="noopener noreferrer">
-                    Read Paper <span className="material-symbols-outlined text-sm">open_in_new</span>
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Research 2 */}
-          {(activeTab === 'All' || activeTab === 'Research') && (
-            <motion.div 
-              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/5"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className="p-6 h-full flex flex-col">
-                <div className="flex gap-2 mb-3">
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-violet-500/10 text-violet-500 rounded">Research (2025)</span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-sky-500/10 text-sky-500 rounded">IEEE</span>
-                </div>
-                <h3 className="text-slate-900 dark:text-slate-100 text-xl font-bold mb-2">Rice Leaf Disease Detection</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-                  A Hybrid Deep Learning Framework for Rice Leaf Disease Detection and Classification Using DenseNet201 and YOLOv8
-                  <br /><br />
-                  <span className="italic text-xs">(IEEE RAAICON paper already accepted and presented in the conference, pending publication)</span>
-                </p>
-                <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
-                  <a className="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all" href="https://drive.google.com/file/d/1VPSYufQ4dAEqM5F4YEpZ3_x81TKItNZo/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
-                    Read Paper <span className="material-symbols-outlined text-sm">open_in_new</span>
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
+            ))}
+          </motion.div>
         </div>
       </div>
     </div>
